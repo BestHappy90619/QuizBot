@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Stars (interactive)</title>
+  <style>
+    html,
+		body {
+		  margin: 0;
+		  overflow: hidden;
+		  width: 100%;
+		  height: 100%;
+		  background: #f3f3f3;
+		}
+
+		.filter {
+		  width: 100%;
+		  height: 100%;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  animation: colorChange 30s ease-in-out infinite;
+		  animation-fill-mode: both;
+		  mix-blend-mode: overlay;
+		}
+		
+		@keyframes colorChange {
+		  0%,
+		  100% {
+		    opacity: 0;
+		  }
+		  50% {
+		    opacity: .4;
+		  }
+		}
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="filter"></div>
+<canvas id="canvas"></canvas>
+</body>
+<script>
+
+function Star(id, x, y){
+	this.id = id;
+	this.x = x;
+	this.y = y;
+	this.r = Math.floor(Math.random()*2)+1;
+	var alpha = (Math.floor(Math.random()*10)+1)/10/2;
+	this.color = "rgba(62,144,200,"+alpha+")";
+}
+
+Star.prototype.draw = function() {
+	ctx.fillStyle = this.color;
+	ctx.shadowBlur = this.r * 2;
+	ctx.beginPath();
+	ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+	ctx.closePath();
+	ctx.fill();
+}
+
+Star.prototype.move = function() {
+	this.y -= .15 + params.backgroundSpeed/100;
+	if (this.y <= -10) this.y = HEIGHT + 10;
+	this.draw();
+}
+
+var canvas  = document.getElementById('canvas'),
+	ctx = canvas.getContext('2d'),
+	WIDTH,
+	HEIGHT,
+	mouseMoving = false,
+	mouseMoveChecker,
+	mouseX,
+	mouseY,
+	stars = [],
+	initStarsPopulation = 100,
+	dots = [],
+	dotsMinDist = 2,
+	params = {
+		maxDistFromCursor: 50,
+		dotsSpeed: 0,
+		backgroundSpeed: 60
+	};
+
+
+setCanvasSize();
+init();
+
+function setCanvasSize() {
+	WIDTH = document.documentElement.clientWidth,
+    HEIGHT = document.documentElement.clientHeight;                      
+
+	canvas.setAttribute("width", WIDTH);
+	canvas.setAttribute("height", HEIGHT);
+}
+
+function init() {
+	ctx.strokeStyle = "white";
+	ctx.shadowColor = "white";
+	for (var i = 0; i < initStarsPopulation; i++) {
+		stars[i] = new Star(i, Math.floor(Math.random()*WIDTH), Math.floor(Math.random()*HEIGHT));
+		//stars[i].draw();
+	}
+	ctx.shadowBlur = 0;
+	animate();
+}
+
+function animate() {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+    for (var i in stars) {
+    	stars[i].move();
+    }
+    for (var i in dots) {
+    	dots[i].move();
+    }
+    requestAnimationFrame(animate);
+}
+
+function degToRad(deg) {
+	return deg * (Math.PI / 180);
+}
+</script>
+</html>
