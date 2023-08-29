@@ -29,7 +29,6 @@ install_files
 /storage/*.key
 Homestead.json
 Homestead.yaml
-.env
 data.ms
 /test-results/
 /playwright-report/

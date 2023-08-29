@@ -112,7 +112,7 @@ const SignIn = () => {
         >
           Sign In
         </QBButton>
-        <p className="cursor-pointer text-custom-txt-clr">Forgot password?</p>
+        <p className="cursor-pointer text-custom-txt-clr" onClick={() => navigate("/resetpassword")}>Forgot password?</p>
         <div className="flex w-full items-center justify-center">
           <hr className="border-1 w-full border-t-custom-gray" />
           <p className="px-4 text-lg text-custom-gray">or</p>
