@@ -29,7 +29,6 @@ install_files
 /storage/*.key
 Homestead.json
 Homestead.yaml
-.env
 data.ms
 /test-results/
 /playwright-report/
@@ -37,3 +36,5 @@ data.ms
 storageState.json
 # translation files (include default "en"), will be created during installation
 resources/lang/*.json
+
+/backend/.env

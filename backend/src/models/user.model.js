@@ -3,9 +3,10 @@ const {
   createNewUser: createNewUserQuery,
   findUserByEmail: findUserByEmailQuery,
   findUserById: findUserByIdQuery,
-  findAdmin: findAdminQuery,
   updateProfile: updateProfileQuery,
   updatePassword: updatePasswordQuery,
+  setVerified: setVerifiedQuery,
+  resetPassword: resetPasswordQuery
 } = require("../database/queries");
 const { logger } = require("../utils/logger");
 
@@ -33,7 +34,6 @@ class User {
       (err, res) => {
         if (err) {
           logger.error(err.message);
-          console.log(err);
           cb(err, null);
           return;
         }
@@ -45,6 +45,18 @@ class User {
         });
       }
     );
+  }
+
+  static setVerified(data, cb) {
+    db.query( setVerifiedQuery, [data.verified, data.id], (err, res) => {
+      if (err) {
+        logger.error(err.message);
+        cb(err, null);
+        return;
+      }
+      cb(null, { msg: "success" });
+      return;
+    });
   }
 
   static findUserByEmail(email, cb) {
@@ -64,21 +76,6 @@ class User {
 
   static findUserById(id, cb) {
     db.query(findUserByIdQuery, id, (err, res) => {
-      if (err) {
-        logger.error(err.message);
-        cb(err, null);
-        return;
-      }
-      if (res.length) {
-        cb(null, res[0]);
-        return;
-      }
-      cb({ kind: "not_found" }, null);
-    });
-  }
-
-  static findAdmin(cb) {
-    db.query(findAdminQuery, (err, res) => {
       if (err) {
         logger.error(err.message);
         cb(err, null);
@@ -113,6 +110,18 @@ class User {
 
   static updatePassword(data, cb) {
     db.query(updatePasswordQuery, [data.hashedNewPwd, data.id], (err, res) => {
+      if (err) {
+        logger.error(err.message);
+        cb(err, null);
+        return;
+      }
+      cb(null, { msg: "success" });
+      return;
+    });
+  }
+
+  static resetPassword(data, cb) {
+    db.query(resetPasswordQuery, [data.hashedNewPwd, data.email], (err, res) => {
       if (err) {
         logger.error(err.message);
         cb(err, null);

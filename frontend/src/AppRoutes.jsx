@@ -7,6 +7,8 @@ import ChatWithBot from "./pages/Bot/Chat";
 import Training from "./pages/Bot/Training";
 import SignIn from "./pages/Auth/signin";
 import SignUp from "./pages/Auth/signup";
+import ResetPassword from "./pages/Auth/resetPassword";
+import VerifyPage from "./pages/Auth/verify";
 import Contact from "./pages/Contact";
 import NotFoundPage from "./pages/NotFoundPage";
 // import Subscription from "./pages/Subscription";
@@ -68,7 +70,15 @@ const AppRoutes = [
         path: "/signup",
         element: <SignUp />,
       },
+      {
+        path: "/resetpassword",
+        element: <ResetPassword />,
+      },
     ],
+  },
+  {
+    path: "/verify",
+    element: <VerifyPage />
   },
   {
     path: "*",

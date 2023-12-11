@@ -20,6 +20,7 @@ const {
   MAILER_USER,
   MAILER_PASS,
   CONTACT_MAIL_ADDRESS,
+  SELF_URL
 } = process.env;
 
 const requiredCredentials = [
@@ -40,6 +41,7 @@ const requiredCredentials = [
   "MAILER_USER",
   "MAILER_PASS",
   "CONTACT_MAIL_ADDRESS",
+  "SELF_URL"
 ];
 
 for (const credential of requiredCredentials) {
@@ -67,4 +69,5 @@ module.exports = {
   MAILER_USER,
   MAILER_PASS,
   CONTACT_MAIL_ADDRESS,
+  SELF_URL
 };

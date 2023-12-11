@@ -11,10 +11,10 @@ const {
 } = require("../utils/secrets");
 
 const config = {
-  service: MAILER_SERVICE || "gmail",
-  //   host: MAILER_HOST || "smtp.gmail.com",
-  //   port: MAILER_PORT || 587,
-  //   secure: MAILER_SECURE || false,
+  service: MAILER_SERVICE || "Outlook365",
+  host: MAILER_HOST || "smtp.office365.com",
+  port: MAILER_PORT || 587,
+  secure: MAILER_SECURE || false,
   auth: {
     user: MAILER_USER,
     pass: MAILER_PASS,
@@ -22,7 +22,7 @@ const config = {
 };
 
 const send = (data) => {
-  console.log(config);
+
   const transporter = nodemailer.createTransport(config);
   transporter.sendMail(data, (err, info) => {
     if (err) {

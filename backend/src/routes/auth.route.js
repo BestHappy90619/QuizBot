@@ -17,6 +17,8 @@ router
     asyncHandler(authController.signup)
   );
 
+router.route("/verify/:token").get(asyncHandler(authController.verify));
+
 router
   .route("/signin")
   .post(signinValidator, asyncHandler(authController.signin));
@@ -28,5 +30,17 @@ router
 router
   .route("/updatePassword")
   .post(updatePasswordValidator, asyncHandler(authController.updatePassword));
+
+router
+  .route("/getOTP")
+  .post(asyncHandler(authController.getOTP));
+
+router
+  .route("/submitOTP")
+  .post(asyncHandler(authController.submitOTP));
+
+router
+  .route("/resetPassword")
+  .post(asyncHandler(authController.resetPassword));
 
 module.exports = router;

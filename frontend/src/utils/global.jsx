@@ -4,7 +4,7 @@ export const MSG_BY_USER = 0;
 
 export const MSG_BY_BOT = 1;
 
-export const DEBUG_MODE = true;
+export const DEBUG_MODE = false;
 
 export const ADMIN_ROLE = 1;
 

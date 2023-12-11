@@ -25,10 +25,10 @@ export const register = createAsyncThunk(
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           return;
+        } else if(res.status === 409) {
+          thunkAPI.dispatch(setMessage(res.data.message));
         } else if (res.status === 400) {
-          if (res.data.message.startswith("A user with email address "))
-            thunkAPI.dispatch(setMessage(res.data.message));
-          else thunkAPI.dispatch(setMessage("Please input the valid format!"));
+          thunkAPI.dispatch(setMessage("Please input the valid format!"));
         } else {
           thunkAPI.dispatch(
             setMessage("Sorry, An error occurred while registering you.")
@@ -57,6 +57,8 @@ export const login = createAsyncThunk(
           return { user: res.data.data };
         } else if (res.status === 404) {
           thunkAPI.dispatch(setMessage("The Email was not found!"));
+        } else if (res.status === 403) {
+          thunkAPI.dispatch(setMessage("Sorry, You should verify your email. Please check your inbox!"));
         } else if (res.status === 401) {
           thunkAPI.dispatch(setMessage("The password is incorrect!"));
         } else if (res.status === 400) {

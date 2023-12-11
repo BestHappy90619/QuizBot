@@ -27,10 +27,6 @@ const findUserById = `
 SELECT * FROM users WHERE id = ?
 `;
 
-const findAdmin = `
-SELECT * FROM users
-`;
-
 const updateProfile = `
 UPDATE users SET firstname=?, lastname=?, email=? WHERE id = ?;
 SELECT * FROM users WHERE id = ?;
@@ -38,6 +34,10 @@ SELECT * FROM users WHERE id = ?;
 
 const updatePassword = `
 UPDATE users SET password=? WHERE id = ?;
+`;
+
+const resetPassword = `
+UPDATE users SET password=? WHERE email = ?;
 `;
 
 const createNewBot = `
@@ -106,7 +106,7 @@ UPDATE chunks SET chunk_nums = ? WHERE traindata_id = ? AND level = ? AND isMCQ 
 `;
 
 const delChunk = `
-DELETE FROM chunks WHERE traindata_id = ? AND level = ? AND isMCQ = ?;;
+DELETE FROM chunks WHERE traindata_id = ? AND level = ? AND isMCQ = ?;
 `;
 
 const changeBot = `
@@ -121,6 +121,43 @@ const search = `
 SELECT * FROM bots WHERE bot_name LIKE ? OR description LIKE ?;
 `;
 
+const createNewToken = `
+INSERT INTO tokens VALUES(NULL, ?, ?);
+`
+
+const findTokenByUserId = `
+SELECT * FROM tokens WHERE user_id=?;
+`;
+
+const deleteToken = `
+DELETE FROM tokens WHERE token=?;
+`;
+
+const setVerified = `
+UPDATE users SET verified=? WHERE id = ?;
+`;
+
+const updateToken = `
+UPDATE tokens SET token=? WHERE user_id = ?;
+`;
+
+const createNewOTP = `
+INSERT INTO otps VALUES(NULL, ?, ?, ?);
+`;
+
+const findOTPByEmail = `
+SELECT * FROM otps WHERE email=?;
+`;
+
+const deleteOTP = `
+DELETE FROM otps WHERE email=?;
+`;
+
+const updateOTP = `
+UPDATE otps SET otp=?, exp=? WHERE email = ?;
+`;
+
+
 module.exports = {
   createDB,
   dropDB,
@@ -128,9 +165,9 @@ module.exports = {
   createNewUser,
   findUserByEmail,
   findUserById,
-  findAdmin,
   updateProfile,
   updatePassword,
+  resetPassword,
   createNewBot,
   findByName,
   getAllTrainDataByBot,
@@ -149,4 +186,13 @@ module.exports = {
   changeBot,
   isActive,
   search,
+  findTokenByUserId,
+  deleteToken,
+  createNewToken,
+  setVerified,
+  updateToken,
+  createNewOTP,
+  findOTPByEmail,
+  deleteOTP,
+  updateOTP,
 };
