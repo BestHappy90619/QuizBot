@@ -27,7 +27,8 @@ const {
   PINECONE_INDEX_NAME,
 } = require("../utils/secrets");
 
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY =
+  "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 async function getPineconeIndex() {
   const pinecone = new PineconeClient();

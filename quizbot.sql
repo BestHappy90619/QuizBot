@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 100428 (10.4.28-MariaDB)
  Source Host           : localhost:3306
- Source Schema         : chatgpt
+ Source Schema         : quizbot
 
  Target Server Type    : MySQL
  Target Server Version : 100428 (10.4.28-MariaDB)
